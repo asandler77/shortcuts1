@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-firebase/app": "^13.0.1",
+    "@react-native-firebase/dynamic-links": "^13.0.1",
     "@react-navigation/bottom-tabs": "^5.11.15",
     "@react-navigation/native": "^5.9.8",
     "@react-navigation/stack": "^5.14.9",

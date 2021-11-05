@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "263088507807",
+    "project_id": "navdeeplink-d1309",
+    "storage_bucket": "navdeeplink-d1309.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263088507807:android:f59c0fe47372eb57614baa",
+        "android_client_info": {
+          "package_name": "com.navdeeplink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263088507807-qdmrfjck7gk40qt9opralf724ska87n0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmab8qkNXzVeOf4WlF2gNl3sBoUcloQAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263088507807-qdmrfjck7gk40qt9opralf724ska87n0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

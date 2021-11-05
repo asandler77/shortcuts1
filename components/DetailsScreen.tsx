@@ -5,12 +5,6 @@ export default ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <TextInput>DetailsScreen</TextInput>
-        <Button
-            title={'Go to About'}
-            onPress={() => {
-                navigation.navigate('About');
-            }}
-        />
       <Button
         title={'Go Home'}
         onPress={() => {

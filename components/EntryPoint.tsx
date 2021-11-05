@@ -8,6 +8,9 @@ import DetailsScreen from './DetailsScreen';
 import Settings from './Settings';
 import About from './About';
 import {Text} from 'react-native';
+import {useEffect} from "react";
+import dynamicLinks from '@react-native-firebase/dynamic-links';
+
 
 
     // npx uri-scheme open mychat://home --ios
@@ -34,7 +37,7 @@ const config = {
 };
 
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://mychat', 'mychat://'],
   config,
 };
 
@@ -62,7 +65,22 @@ function SettingsStackScreen() {
 
 const Tab = createBottomTabNavigator();
 
-export const EntryPoint = () => {
+export const EntryPoint = ({navigation}) => {
+  useEffect(() => {
+    dynamicLinks()
+        .getInitialLink()
+        .then(link => {
+          console.log('liiiiiiiink', link)
+          if (link.url === 'https://mychat/about') {
+            goToAbout();
+          }
+        });
+  }, []);
+
+  const goToAbout=()=>{
+    console.log('in aboutttttttttt')
+    navigation.navigate('Details');
+  }
   return (
     <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
       <Tab.Navigator>
@@ -72,3 +90,17 @@ export const EntryPoint = () => {
     </NavigationContainer>
   );
 };
+
+// function App() {
+//   useEffect(() => {
+//     dynamicLinks()
+//         .getInitialLink()
+//         .then(link => {
+//           if (link.url === 'https://invertase.io/offer') {
+//             // ...set initial route as offers screen
+//           }
+//         });
+//   }, []);
+//
+//   return null;
+// }
