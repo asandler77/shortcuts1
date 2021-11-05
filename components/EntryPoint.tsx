@@ -91,16 +91,4 @@ export const EntryPoint = ({navigation}) => {
   );
 };
 
-// function App() {
-//   useEffect(() => {
-//     dynamicLinks()
-//         .getInitialLink()
-//         .then(link => {
-//           if (link.url === 'https://invertase.io/offer') {
-//             // ...set initial route as offers screen
-//           }
-//         });
-//   }, []);
-//
-//   return null;
-// }
+
