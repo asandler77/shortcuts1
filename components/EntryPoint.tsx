@@ -65,22 +65,7 @@ function SettingsStackScreen() {
 
 const Tab = createBottomTabNavigator();
 
-export const EntryPoint = ({navigation}) => {
-  useEffect(() => {
-    dynamicLinks()
-        .getInitialLink()
-        .then(link => {
-          console.log('liiiiiiiink', link)
-          if (link.url === 'https://mychat/about') {
-            goToAbout();
-          }
-        });
-  }, []);
-
-  const goToAbout=()=>{
-    console.log('in aboutttttttttt')
-    navigation.navigate('Details');
-  }
+export const EntryPoint = () => {
   return (
     <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
       <Tab.Navigator>
