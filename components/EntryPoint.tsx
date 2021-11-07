@@ -13,8 +13,10 @@ import {Text} from 'react-native';
 /*
 https://navdeeplink.page.link/test
 The link above configured on firebase console for current project under alexeysh77 gmail user. In order to edit the screen go to:
-https://console.firebase.google.com/ open NavDeepLink project, on side menu bar go to Dynamic Links. Click on hidden 3 dots fot edit menu.
-In opened window click on Next, in the next window edit the url as yu wish https://mychat/settings...
+https://console.firebase.google.com/ open NavDeepLink project,
+on side menu bar go to Dynamic Links.
+Click on hidden 3 dots fot edit menu.
+In opened window click on Next, in the next window edit the url as you need https://mychat/settings...
 https://navdeeplink.page.link/test
 
 The screencasts on the next url: https://rnfirebase.io/screencasts/
