@@ -8,24 +8,25 @@ import DetailsScreen from './DetailsScreen';
 import Settings from './Settings';
 import About from './About';
 import {Text} from 'react-native';
-import {useEffect} from "react";
-import dynamicLinks from '@react-native-firebase/dynamic-links';
 
 
+/*
+https://navdeeplink.page.link/test
+The link above configured on firebase console for current project under alexeysh77 gmail user. In order to edit the screen go to:
+https://console.firebase.google.com/ open NavDeepLink project, on side menu bar go to Dynamic Links. Click on hidden 3 dots fot edit menu.
+In opened window click on Next, in the next window edit the url as yu wish https://mychat/settings...
+https://navdeeplink.page.link/test
 
-    // npx uri-scheme open mychat://home --ios
-    // npx uri-scheme open mychat://about --ios
-    //   npx uri-scheme open mychat://details --ios
-    //   npx uri-scheme open mychat://settings --ios
+ */
 
 
 const config = {
   screens: {
     Home: {
-      screens:{
+      screens: {
         Home: 'home',
-        Details: 'details'
-      }
+        Details: 'details',
+      },
     },
     Settings: {
       screens: {
@@ -75,5 +76,3 @@ export const EntryPoint = () => {
     </NavigationContainer>
   );
 };
-
-
