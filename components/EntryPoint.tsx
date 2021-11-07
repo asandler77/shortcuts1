@@ -17,6 +17,8 @@ https://console.firebase.google.com/ open NavDeepLink project, on side menu bar 
 In opened window click on Next, in the next window edit the url as yu wish https://mychat/settings...
 https://navdeeplink.page.link/test
 
+The screencasts on the next url: https://rnfirebase.io/screencasts/
+
  */
 
 
