@@ -7,10 +7,15 @@ import Home from './Home';
 import DetailsScreen from './DetailsScreen';
 import Settings from './Settings';
 import About from './About';
-import {DeviceEventEmitter, Text} from 'react-native';
-import QuickActions from "react-native-quick-actions";
-
-
+import {
+  Button,
+  DeviceEventEmitter,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import QuickActions from 'react-native-quick-actions';
 
 /*
 https://navdeeplink.page.link/test
@@ -23,10 +28,10 @@ https://navdeeplink.page.link/test
 
 The screencasts on the next url: https://rnfirebase.io/screencasts/
 
-    // npx uri-scheme open mychat://settings --android
-
-
  */
+
+// npx uri-scheme open mychat://settings --ios
+
 
 DeviceEventEmitter.addListener('quickActionShortcut', data => {
   console.log(data.title);
@@ -34,90 +39,100 @@ DeviceEventEmitter.addListener('quickActionShortcut', data => {
   console.log(data.userInfo);
 });
 
-
-DeviceEventEmitter.addListener("quickActionShortcut", data => {
+DeviceEventEmitter.addListener('quickActionShortcut', data => {
   console.log(data.title);
   console.log(data.type);
   console.log(data.userInfo);
 });
 
 function doSomethingWithTheAction(data: any) {
-  console.log(data.title);
-  console.log(data.type);
-  console.log(data.userInfo);
-}
+  console.log(data?.title);
+  console.log(data?.type);
+  console.log(data?.userInfo);
 
+
+}
 
 QuickActions.setShortcutItems([
   {
-    type: "Orders", // Required
-    title: "Go to settings", // Optional, if empty, `type` will be used instead
+    type: 'Orders', // Required
+    title: 'Go to settings', // Optional, if empty, `type` will be used instead
     subtitle: "See orders you've made",
-    icon: "Compose", // Icons instructions below
+    icon: 'Compose', // Icons instructions below
     userInfo: {
-      url: "mychat://settings" // Provide any custom data like deep linking URL
-    }
-  }
+      url: 'mychat://settings', // Provide any custom data like deep linking URL
+    },
+  },
 ]);
-
-
-
-
 
 const config = {
   screens: {
-    Home: {
-      screens: {
-        Home: 'home',
-        Details: 'details',
-      },
-    },
-    Settings: {
-      screens: {
-        Settings: 'settings',
-        About: 'about',
-      },
-    },
+    // Home: {
+    //   screens: {
+    //     Home: 'home',
+    //     Details: 'details',
+    //   },
+    // },
+    Home: 'home',
+    Settings: 'settings',
   },
 };
 
 const linking = {
-  prefixes: [ 'mychat://', 'https://mychat'],
+  prefixes: ['mychat://', 'https://mychat'],
   config,
 };
 
-const HomeStack = createStackNavigator();
+QuickActions.popInitialAction()
+    .then(doSomethingWithTheAction)
+    .catch(console.error);
 
-function HomeStackScreen() {
+const Settings1 = ({navigation}: any) => {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={Home} />
-      <HomeStack.Screen name="Details" component={DetailsScreen} />
-    </HomeStack.Navigator>
+    <View style={styles.container}>
+      <TextInput>DetailsScreen</TextInput>
+      <Button
+        title={'Go Home'}
+        onPress={() => {
+          navigation.navigate('Home');
+        }}
+      />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
   );
-}
+};
 
-const SettingsStack = createStackNavigator();
-
-function SettingsStackScreen() {
-  console.log('SettingsStackScreen innnnnnn')
+const Home1 = ({navigation}: any) => {
   return (
-    <SettingsStack.Navigator>
-      <SettingsStack.Screen name="Settings" component={Settings} />
-      <SettingsStack.Screen name="About" component={About} />
-    </SettingsStack.Navigator>
+    <View style={styles.container}>
+      <TextInput>Home</TextInput>
+      <Button
+        title={'Go to settings'}
+        onPress={() => {
+          navigation.navigate('Settings');
+        }}
+      />
+    </View>
   );
-}
+};
 
-const Tab = createBottomTabNavigator();
+const Tab = createStackNavigator();
 
 export const EntryPoint = () => {
   return (
     <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
       <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        <Tab.Screen name="Home" component={Home1} />
+        <Tab.Screen name="Settings" component={Settings1} />
       </Tab.Navigator>
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
