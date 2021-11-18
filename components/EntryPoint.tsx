@@ -7,7 +7,9 @@ import Home from './Home';
 import DetailsScreen from './DetailsScreen';
 import Settings from './Settings';
 import About from './About';
-import {Text} from 'react-native';
+import {DeviceEventEmitter, Text} from 'react-native';
+import QuickActions from "react-native-quick-actions";
+
 
 
 /*
@@ -21,7 +23,45 @@ https://navdeeplink.page.link/test
 
 The screencasts on the next url: https://rnfirebase.io/screencasts/
 
+    // npx uri-scheme open mychat://settings --android
+
+
  */
+
+DeviceEventEmitter.addListener('quickActionShortcut', data => {
+  console.log(data.title);
+  console.log(data.type);
+  console.log(data.userInfo);
+});
+
+
+DeviceEventEmitter.addListener("quickActionShortcut", data => {
+  console.log(data.title);
+  console.log(data.type);
+  console.log(data.userInfo);
+});
+
+function doSomethingWithTheAction(data: any) {
+  console.log(data.title);
+  console.log(data.type);
+  console.log(data.userInfo);
+}
+
+
+QuickActions.setShortcutItems([
+  {
+    type: "Orders", // Required
+    title: "Go to settings", // Optional, if empty, `type` will be used instead
+    subtitle: "See orders you've made",
+    icon: "Compose", // Icons instructions below
+    userInfo: {
+      url: "mychat://settings" // Provide any custom data like deep linking URL
+    }
+  }
+]);
+
+
+
 
 
 const config = {
@@ -42,7 +82,7 @@ const config = {
 };
 
 const linking = {
-  prefixes: ['https://mychat', 'mychat://'],
+  prefixes: [ 'mychat://', 'https://mychat'],
   config,
 };
 
@@ -60,6 +100,7 @@ function HomeStackScreen() {
 const SettingsStack = createStackNavigator();
 
 function SettingsStackScreen() {
+  console.log('SettingsStackScreen innnnnnn')
   return (
     <SettingsStack.Navigator>
       <SettingsStack.Screen name="Settings" component={Settings} />

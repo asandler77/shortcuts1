@@ -10,8 +10,18 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import com.reactNativeQuickActions.AppShortcutsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
+
+// Also add new AppShortcutsPackage() within the
+//
+// public List<ReactPackage> createAdditionalReactPackages() {
+//   return Arrays.<ReactPackage>asList(
+//     ...
+//   );
+// }
+// section of MainApplication.java
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
