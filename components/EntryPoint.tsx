@@ -90,6 +90,7 @@ const navigateToSettings = () => {
 };
 
 DeviceEventEmitter.addListener('quickActionShortcut', data => {
+  console.log('kukareku');
   console.log(data.title);
   console.log(data.type);
   console.log(data.userInfo);
@@ -98,8 +99,10 @@ DeviceEventEmitter.addListener('quickActionShortcut', data => {
 const doSomethingWithTheAction = (data: any) => {
   console.log(data?.title);
   console.log(data?.type);
-  console.log(data?.userInfo);
-  navigateToSettings();
+  console.log('userInfo', data?.userInfo);
+  if (data?.userInfo.url === 'mychat://settings') {
+    navigateToSettings();
+  }
 };
 
 QuickActions.popInitialAction()
