@@ -13,39 +13,14 @@ import {
   View,
 } from 'react-native';
 import QuickActions from 'react-native-quick-actions';
+import WebPage from "./WebPage";
+import {WebView} from "react-native-webview";
 
-/*
-https://navdeeplink.page.link/test
-The link above configured on firebase console for current project under alexeysh77 gmail user. In order to edit the screen go to:
-https://console.firebase.google.com/ open NavDeepLink project,
-on side menu bar go to Dynamic Links.
-Click on hidden 3 dots fot edit menu.
-In opened window click on Next, in the next window edit the url as you need https://mychat/settings...
-https://navdeeplink.page.link/test
-
-The screencasts on the next url: https://rnfirebase.io/screencasts/
-
- */
-
-// npx uri-scheme open mychat://settings --ios
-
-const config = {
-  screens: {
-    // Home: {
-    //   screens: {
-    //     Home: 'home',
-    //     Details: 'details',
-    //   },
-    // },
-    Home: 'home',
-    Settings: 'settings',
-  },
-};
-
-const linking = {
-  prefixes: ['mychat://', 'https://mychat'],
-  config,
-};
+DeviceEventEmitter.addListener('quickActionShortcut', data => {
+  console.log(data.title);
+  console.log(data.type);
+  console.log(data.userInfo);
+});
 
 const Settings1 = ({navigation}: any) => {
   return (
@@ -61,6 +36,12 @@ const Settings1 = ({navigation}: any) => {
   );
 };
 
+const WebPage1 = ({navigation}: any) => {
+  return (
+      <WebView source={{ uri: 'https://www.youtube.com/watch?v=tlUcmD0zPI4&ab_channel=ChillMusicLab' }} />
+  );
+};
+
 const Home1 = ({navigation}: any) => {
   return (
     <View style={styles.container}>
@@ -70,6 +51,12 @@ const Home1 = ({navigation}: any) => {
         onPress={() => {
           navigation.navigate('Settings');
         }}
+      />
+      <Button
+          title={'Go to Web'}
+          onPress={() => {
+            navigation.navigate('WebPage');
+          }}
       />
     </View>
   );
@@ -89,6 +76,10 @@ const navigateToSettings = () => {
   navigateObject('Settings', {});
 };
 
+const navigateToWeb = () => {
+    navigateObject('WebPage', {});
+};
+
 DeviceEventEmitter.addListener('quickActionShortcut', data => {
   console.log('kukareku');
   console.log(data.title);
@@ -103,6 +94,10 @@ const doSomethingWithTheAction = (data: any) => {
   if (data?.userInfo.url === 'mychat://settings') {
     navigateToSettings();
   }
+
+  if(data?.userInfo.url === 'mychat://web'){
+      navigateToWeb();
+  }
 };
 
 QuickActions.popInitialAction()
@@ -112,24 +107,33 @@ QuickActions.popInitialAction()
 QuickActions.setShortcutItems([
   {
     type: 'Orders', // Required
-    title: 'Go to settings', // Optional, if empty, `type` will be used instead
+    title: 'Go to settings...', // Optional, if empty, `type` will be used instead
     subtitle: "See orders you've made",
     icon: 'Compose', // Icons instructions below
     userInfo: {
       url: 'mychat://settings', // Provide any custom data like deep linking URL
     },
   },
+    {
+        type: 'Web', // Required
+        title: 'Go to Web...', // Optional, if empty, `type` will be used instead
+        subtitle: "WebView",
+        icon: 'Compose', // Icons instructions below
+        userInfo: {
+            url: 'mychat://web', // Provide any custom data like deep linking URL
+        },
+    },
 ]);
 
 export const EntryPoint = () => {
   return (
     <NavigationContainer
       ref={navigationRef}
-      // linking={linking}
-      fallback={<Text>Loading...</Text>}>
+      >
       <Tab.Navigator>
         <Tab.Screen name="Home" component={Home1} />
         <Tab.Screen name="Settings" component={Settings1} />
+        <Tab.Screen name="WebPage" component={WebPage1} />
       </Tab.Navigator>
     </NavigationContainer>
   );
